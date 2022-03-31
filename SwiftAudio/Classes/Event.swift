@@ -116,13 +116,13 @@ extension AudioPlayer {
         }
         
         func emit(data: EventData) {
-            eventQueue.async {
+//            eventQueue.async { есть проблемы, что может слишком долго откладывать срабатывание
                 self.invokersSemaphore.wait()
                 self.invokers = self.invokers.filter({ (invoker) -> Bool in
                     return invoker.invoke(data)
                 })
                 self.invokersSemaphore.signal()
-            }
+//            }
         }
         
     }
